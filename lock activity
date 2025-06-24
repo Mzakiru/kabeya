@@ -1,0 +1,37 @@
+package com.example.applocker;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+public class LockActivity extends AppCompatActivity {
+    EditText pinInput;
+    Button unlockButton;
+    private final String correctPin = "1234";
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_lock);
+
+        pinInput = findViewById(R.id.editPin);
+        unlockButton = findViewById(R.id.btnUnlock);
+
+        unlockButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String enteredPin = pinInput.getText().toString();
+                if (enteredPin.equals(correctPin)) {
+                    Toast.makeText(LockActivity.this, "Unlocked!", Toast.LENGTH_SHORT).show();
+                    finish(); // Close lock screen
+                } else {
+                    Toast.makeText(LockActivity.this, "Incorrect PIN!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+}
